@@ -4,25 +4,29 @@
       "id": "1",
       "firstName": "Avied",
       "age": 17,
-      "companyId": "2"
+      "companyId": "2",
+      "positionId": "1"
     },
     {
       "id": "2",
       "firstName": "Alex",
       "age": 23,
-      "companyId": "1"
+      "companyId": "1",
+      "positionId": "1"
     },
     {
       "id": "3",
       "firstName": "Udin",
       "age": 27,
-      "companyId": "1"
+      "companyId": "1",
+      "positionId": "2"
     },
     {
       "firstName": "Santoso",
       "age": 21,
       "id": "GMzUuZC",
-      "companyId": "2"
+      "companyId": "2",
+      "positionId": "2"
     }
   ],
   "companies": [
@@ -35,6 +39,16 @@
       "id": "2",
       "name": "Google",
       "description": "PixelBook"
+    }
+  ],
+  "positions": [
+    {
+      "id": "1",
+      "positionName": "Manager"
+    },
+    {
+      "id": "2",
+      "positionName": "Programmer"
     }
   ]
 }
