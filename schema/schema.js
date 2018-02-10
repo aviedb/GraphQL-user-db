@@ -1,13 +1,14 @@
 const graphql = require('graphql')
 const axios = require('axios')
-// const _ = require('lodash')
 
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull } = graphql
-
-// const users = [
-//   { id: '23', firstName: 'Avied', age: 17 },
-//   { id: '47', firstName: 'Suci', age: 17 }
-// ]
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLSchema,
+  GraphQLList,
+  GraphQLNonNull
+} = graphql
 
 const CompanyType = new GraphQLObjectType({
   name: 'Company',
@@ -18,7 +19,8 @@ const CompanyType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/companies/${parentValue.id}/users`).then((resp) => resp.data)
+        return axios.get(`http://localhost:3000/companies/${parentValue.id}/users`)
+          .then((resp) => resp.data)
       }
     }
   })
@@ -32,7 +34,8 @@ const PositionType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/positions/${parentValue.id}/users`).then((resp) => resp.data)
+        return axios.get(`http://localhost:3000/positions/${parentValue.id}/users`)
+          .then((resp) => resp.data)
       }
     }
   })
@@ -47,13 +50,15 @@ const UserType = new GraphQLObjectType({
     company: {
       type: CompanyType,
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/companies/${parentValue.companyId}`).then((resp) => resp.data)
+        return axios.get(`http://localhost:3000/companies/${parentValue.companyId}`)
+          .then((resp) => resp.data)
       }
     },
     position: {
       type: PositionType,
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/positions/${parentValue.positionId}`).then((resp) => resp.data)
+        return axios.get(`http://localhost:3000/positions/${parentValue.positionId}`)
+          .then((resp) => resp.data)
       }
     }
   })
@@ -66,21 +71,24 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/users/${args.id}`).then((resp) => resp.data)
+        return axios.get(`http://localhost:3000/users/${args.id}`)
+        .then((resp) => resp.data)
       }
     },
     company: {
       type: CompanyType,
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/companies/${args.id}`).then((resp) => resp.data)
+        return axios.get(`http://localhost:3000/companies/${args.id}`)
+          .then((resp) => resp.data)
       }
     },
     position: {
       type: PositionType,
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/positions/${args.id}`).then((resp) => resp.data)
+        return axios.get(`http://localhost:3000/positions/${args.id}`)
+          .then((resp) => resp.data)
       }
     }
   }
@@ -98,14 +106,16 @@ const mutation = new GraphQLObjectType({
         positionId: { type: GraphQLString }
       },
       resolve(parentValue, args) {
-        return axios.post('http://localhost:3000/users', args).then((resp) => resp.data)
+        return axios.post('http://localhost:3000/users', args)
+          .then((resp) => resp.data)
       }
     },
     deleteUser: {
       type: UserType,
       args: { id: { type: new GraphQLNonNull(GraphQLString) } },
       resolve(parentValue, args) {
-        return axios.delete(`http://localhost:3000/users/${args.id}`).then((resp) => resp.data)
+        return axios.delete(`http://localhost:3000/users/${args.id}`)
+          .then((resp) => resp.data)
       }
     },
     editUser: {
@@ -117,7 +127,8 @@ const mutation = new GraphQLObjectType({
         companyId: { type: GraphQLString }
       },
       resolve(parentValue, args ) {
-        return axios.patch(`http://localhost:3000/users/${args.id}`, args).then((resp) => resp.data)
+        return axios.patch(`http://localhost:3000/users/${args.id}`, args)
+          .then((resp) => resp.data)
       }
     }
   }
